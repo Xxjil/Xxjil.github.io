@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React Confetti Button</title>
+    <title>Happy birthday Claudia</title>
     <style>
         * {
-  box-sizing: border-box;
-}
+            box-sizing: border-box;
+        }
 
-body {
-  background-color: #f5f8ff;
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.5;
-  min-block-size: 100vh;
-  display: grid;
-  place-items: center;
-}
+        body {
+            background-color: #f5f8ff;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.5;
+            min-block-size: 100vh;
+            display: grid;
+            place-items: center;
+        }
 
-button {
-  cursor: pointer;
-  font: inherit;
-  margin: 0;
-  padding: 0;
-}
+        button {
+            cursor: pointer;
+            font: inherit;
+            margin: 0;
+            padding: 0;
+        }
 
-.button {
+        .button {
   background-color: #404663;
   color: #fff;
   border: 0;
@@ -47,36 +47,74 @@ button {
     0px 60px 80px rgba(0, 0, 0, 0.07);
 }
 
-.button:active {
-  transform: scale(1.01);
-}
+        .button:active {
+            transform: scale(1.01);
+        }
+
+        .apology-text {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .centered-image {
+            display: block;
+            margin: auto;
+            max-width: 80%;
+            padding: 20px 0;
+        }
+
+        #root {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 <body>
+    <div class="apology-text">
+        I'm sorry I made you feel like you aren't special. <br>
+        You mean the world to me.
+    </div>
+    <!-- Displaying the image -->
+    <img src="claudia.jpg" alt="Birthday Image" class="centered-image">
     <div id="root"></div>
 
     <script type="module">
-        import React from "https://esm.run/react@18";
-        import { createRoot } from "https://esm.run/react-dom@18/client";
-        import confetti from "https://esm.run/canvas-confetti@1";
+      import React from "https://esm.run/react@18";
+      import { createRoot } from "https://esm.run/react-dom@18/client";
+      import confetti from "https://esm.run/canvas-confetti@1";
 
-        function App() {
-          function onClick() {
-            confetti({
-              particleCount: 150,
-              spread: 60
-            });
+      function App() {
+          function onClick(event) {
+              const buttonRect = event.currentTarget.getBoundingClientRect();
+              const x = (buttonRect.left + buttonRect.right) / 2;
+              const y = (buttonRect.top + buttonRect.bottom) / 2;
+
+              confetti({
+                  particleCount: 500,
+                  spread: 60,
+                  startVelocity: 70,
+                  origin: { x: x / window.innerWidth, y: y / window.innerHeight }
+              });
           }
 
           return React.createElement(
-            "button", 
-            { className: "button", onClick: onClick },
-            React.createElement("span", null, "🎉"),
-            React.createElement("span", null, "Like")
+              "button",
+              { className: "button", onClick: onClick },
+              React.createElement("span", null, "🎉"),
+              React.createElement("span", null, "birthday confetti")
           );
-        }
+      }
 
-        createRoot(document.getElementById("root")).render(React.createElement(App));
-    </script>
+      createRoot(document.getElementById("root")).render(React.createElement(App));
+  </script>
 </body>
 </html>
+
+
+
